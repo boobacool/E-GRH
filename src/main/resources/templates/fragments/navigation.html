@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<title>GRH</title>
+<meta charset="utf-8"/>
+</head>
+
+<body>
+
+  <nav class="navbar navbar-default" th:fragment="navigation">
+
+  <div class="container-fluid">
+
+    <div class="navbar-header">
+
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+
+        <span class="sr-only">GRH Groupe ITA SA</span>
+
+        <span class="icon-bar"></span>
+
+        <span class="icon-bar"></span>
+
+        <span class="icon-bar"></span>
+
+      </button>
+
+      <a class="navbar-brand" th:href="@{/}">GRH Groupe ITA SA</a>
+
+    </div>
+
+    <!-- Group the nav links, forms, drop-down menus and other elements for toggling -->
+
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+      <ul class="nav navbar-nav">
+
+        <li class="active"><a th:href="@{/}">Accueil</a></li>
+
+
+        <li class="dropdown">
+
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Administration <b class="caret"></b></a>
+
+          <ul class="dropdown-menu">
+            <li><a th:href="@{/personnel/rajouterpers}">Personnels</a></li>
+            <li><a th:href="@{/antenne/rajouteran}">Antennes</a></li>
+            <li><a th:href="@{/service/rajoutersrc}">Services</a></li>
+            <li><a th:href="@{/contrat/rajoutercont}">Contrats</a></li>
+            <li><a th:href="@{/conge/rajoutercong}">Congés</a></li>
+            <li><a th:href="@{/tp/rajoutertp}">Types Personnels</a></li>
+            <li><a th:href="@{/tco/rajoutertco}">Types Congés</a></li>
+            <li><a th:href="@{/tc/rajoutertc}">Types Contrats</a></li>
+            <li><a th:href="@{/sp/rajoutersp}">Spécialités</a></li>
+            <li><a th:href="@{/mission/rajoutermiss}">Missions</a></li>
+
+            <li class="divider"></li>
+
+            
+
+          </ul>
+
+        </li>
+        
+         <li class="dropdown">
+
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Listes<b class="caret"></b></a>
+
+          <ul class="dropdown-menu">
+
+            <li><a th:href="@{/conge/listeConge}">Congés</a></li>
+            <li><a th:href="@{/contrat/listeContrat}">Contrats</a></li>
+            <li><a th:href="@{/mission/listeMission}">Missions</a></li>
+            
+
+          </ul>
+
+        </li>
+        
+        <li class="dropdown">
+
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Formation<b class="caret"></b></a>
+
+          <ul class="dropdown-menu">
+
+            <li><a th:href="@{/entreprise/rajouterent}">Entreprises</a></li>
+            <li><a th:href="@{/formateur/rajouterfteur}">Formateurs</a></li>
+            <li><a th:href="@{/formation/rajouterftion}">Formations</a></li>
+            <li><a th:href="@{/formation/rajouterftion}">Participants</a></li>
+            
+
+          </ul>
+
+        </li>
+
+      </ul>
+
+
+      <ul class="nav navbar-nav navbar-right">
+
+        <li><a href="#">DRH</a></li>
+
+        <li class="dropdown">
+
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Diagou <b class="caret"></b></a>
+
+          <ul class="dropdown-menu">
+
+            <li><a href="#">Déconnection</a></li>
+
+            
+
+            <li class="divider"></li>
+
+            
+          </ul>
+
+        </li>
+
+      </ul>
+
+    </div><!-- /.navbar-collapse -->
+
+  </div><!-- /.container-fluid -->
+
+</nav>
+
+</body>
+
+</html>

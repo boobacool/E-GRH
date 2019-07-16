@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout/layout">
+
+<head>
+<meta charset="utf-8"/>
+<title>Congés</title>
+</head>
+
+<body>
+
+<div layout:fragment="content">
+ <div class="container">
+	
+		
+			<h1 style="padding-left: 30px;">Congés</h1>
+			<div class="col-md-8" style="padding-left: 30px;">
+			<span class="text-danger" th:if="${m!=null}" th:text="${m}"></span>
+			<span class="text-primary" th:if="${val==1}" >Congé ajouté</span>			
+				<div class="panel panel-default">
+					<div class="panel-heading">Formulaire Congés</div>
+					<div class="panel-body">
+						<form class="form-group" action="#" th:object="${cong}" th:action="@{/conge/savecong}" method="post">
+							<div class="row">
+								<div class="form-group col-md-3">
+									<input th:type="hidden" name="id" th:field="*{id}" />
+								</div>
+							</div>
+							<div class="row">
+								<div class="form-group col-md-12">
+									<input type="text" class="form-control" id="datedebut" th:field="*{datedebut}" placeholder="date Debut" />
+								</div>
+							</div>
+							
+							<div class="row">
+								<div class="form-group col-md-12">
+									<input type="text" class="form-control" id="nbjours" th:field="*{nbjours}" placeholder="nbjours" />
+								</div>
+							</div>
+                           
+							<div class="row">
+                                <div class="form-group col-md-12">
+								<select  class="form-control" id="ida">
+								<option  th:value="0">====Antennes====</option>
+                                <option th:each="c : ${listeant}" th:value="${c.id}" th:text="${c.lib}"></option>
+                               </select>
+															
+								</div>
+							</div>
+							
+							<div class="row">
+                                <div class="form-group col-md-12">
+								<select  id="idtp" class="form-control">
+								<option  th:value="0">====Types Personnels====</option>
+								<option th:each="c : ${listetp}" th:value="${c.id}" th:text="${c.lib}"></option>
+                               
+                                </select>
+															
+								</div>
+							</div>
+							
+							<div class="row">
+                                <div class="form-group col-md-12">
+								<select  id="personnel" th:field="*{personnel}" class="form-control">
+								<option  th:value="0">====Personnels====</option>
+								 </select>
+															
+								</div>
+							</div>
+							
+							<div class="row">
+                                <div class="form-group col-md-12">
+								<select th:field="*{typeConge}" id="typeConge" class="form-control">
+								<option  th:value="0">====Types Congés====</option>
+								<option th:each="c : ${listetcongs}" th:value="${c.id}" th:text="${c.lib}"></option>
+                               
+                                </select>
+															
+								</div>
+							</div>
+							
+                              
+								<div class="row">
+									<div class="form-group">
+										<div class="col-md-6">
+											<button type="submit" th:if="*{id} == 0" class="btn btn-primary">Ajouter</button>
+											<button type="submit" th:if="*{id} > 0" class="btn btn-primary">Modifier</button>
+											<a href="#" th:href="@{/conge/rajoutercong}" class="btn btn-danger" role="button">Annuler</a>
+										</div>
+
+									</div>
+								</div>
+						</form>
+					</div>
+				</div>
+			</div>
+  </div>
+  <script type="text/javascript" th:src="@{/js/posScript1.js}" src="../static/js/posScript1.js"></script>
+		
+</div>
+</body>
+</html>

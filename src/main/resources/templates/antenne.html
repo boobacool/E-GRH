@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout/layout">
+
+<head>
+<meta charset="utf-8"/>
+<title>Layout</title>
+</head>
+
+<body>
+
+  <div layout:fragment="content">
+ <div class="row">
+			<h1 style="padding-left: 30px;">Antennes</h1>
+			<div class="col-md-6" style="padding-left: 30px;">
+				<div class="panel panel-default">
+					<div class="panel-heading">Formulaire Antennes</div>
+					<div class="panel-body">
+						<form class="form-group" action="#" th:object="${an}"
+							th:action="@{/antenne/savean}" method="post">
+							<div class="row">
+								<div class="form-group col-md-3">
+									<input th:type="hidden" name="id" th:field="*{id}" />
+								</div>
+							</div>
+							<div class="row">
+								<div class="form-group col-md-12">
+									<input type="text" class="form-control" id="lib"
+										th:field="*{lib}" placeholder="Libellé" />
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="form-group">
+									<div class="col-md-6">
+										<button type="submit" th:if="*{id} == 0"
+											class="btn btn-primary">Ajouter</button>
+										<button type="submit" th:if="*{id} > 0"
+											class="btn btn-primary">Modifier</button>
+										<a href="#" th:href="@{antenne/rajouteran}" class="btn btn-danger"
+											role="button">Annuler</a>
+									</div>
+
+								</div>
+							</div>
+						</form>
+
+
+
+					</div>
+				</div>
+			</div>
+
+			<div class="col-md-6">
+				<div class="panel panel-default">
+					<div class="panel-heading">La liste des Antennes</div>
+					<div class="panel-body">
+						<h1>Liste Antennes</h1>
+						<div class="card">
+							<div class="card-block">
+								<table class="table table-hover">
+									<thead>
+										<tr>
+											<th>ID</th>
+											<th>Antennes</th>
+											<th>Actions</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr th:each="c:${listeans.content}">
+											<td th:text="${c.id}"></td>
+											<td th:text="${c.lib}"></td>
+											<td><a th:href="@{/antenne/modifieranR(id=${c.id})}" class="btn btn-primary btn-sm" ><span class="glyphicon glyphicon-edit"></span>Modifier</a>
+												<a onclick="return confirm('Etes vous sure ?')"
+												th:href="@{/antenne/supprimeran(id=${c.id})}" class="btn btn-danger btn-sm" ><span class="glyphicon glyphicon-trash"></span>Supprimer</a></td>
+										</tr>
+									</tbody>
+
+								</table>
+								<hr />
+
+								<ul class="nav nav-pills">
+									<li class="nav-item" th:each="i:${pages}"
+										th:class="${i==pageEnCours}?active:''"><a
+										th:href="@{/antenne/rajouteran(page=${i})}" th:text="${i+1}"
+										class="nav-link"></a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+  </div>
+
+</body>
+</html>

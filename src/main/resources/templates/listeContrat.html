@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout/layout">
+
+<head>
+<meta charset="utf-8"/>
+<title>Liste des contrats</title>
+</head>
+
+<body>
+
+  <div layout:fragment="content">
+ <div class="row">
+			<h1 style="padding-left: 30px;">Liste des contrats</h1>
+
+			<div class="col-md-12">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+					<form class="form-group" th:action="@{/contrat/listeContrat}" method="get">
+					  <input type="text" class="form-control" id="mc" th:value="${mc}" name="mc" placeholder="rechercher par nom, par prenoms et par contact" />
+					  <button type="submit" class="btn btn-primary">Recherche</button>
+					</form>
+					
+					</div>
+					<div class="panel-body">
+						<h1>Liste des contrats</h1>
+						<div class="card">
+							<div class="card-block">
+								<table class="table table-hover">
+									<thead>
+										<tr>
+											<th>Nom</th>
+											<th>Prenoms</th>
+											<th>Date de naissance</th>
+											<th>contact</th>
+											<th>Type Contrat</th>
+											<th>Date debut Contrat</th>
+											<th>Date fin Contrat</th>
+											<th>Etat</th>
+											<th>Actions</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr th:each="c:${listecont.content}">
+											<td th:text="${c.personnel.nom}"></td>
+											<td th:text="${c.personnel.prenom}"></td>
+											<td th:text="${#dates.format(c.personnel.datenaiss, 'dd/MM/yyyy')}"></td>
+											<td th:text="${c.personnel.contact}"></td>
+											<td th:text="${c.typeContrat.lib}"></td>
+											<td th:text="${#dates.format(c.datedebut, 'dd/MM/yyyy')}"></td>
+											<td th:text="${#dates.format(c.datefin, 'dd/MM/yyyy')}"></td>
+											<td th:switch="${c.etat}">
+											     <p th:case="0" style="background-color: red;"> Terminé</p>
+                                                 <p th:case="1" style="background-color: green;">Activé</p>
+              
+											</td>
+											<td><a th:href="@{/contrat/modifiercontR(id=${c.id})}" class="btn btn-primary btn-sm" ><span class="glyphicon glyphicon-edit"></span>Modifier</a>
+												<a onclick="return confirm('Etes vous sure ?')"
+												th:href="@{/contrat/supprimercontrat(id=${c.id})}" class="btn btn-danger btn-sm" ><span class="glyphicon glyphicon-trash"></span>Supprimer</a></td>
+										</tr>
+									</tbody>
+
+								</table>
+								<hr />
+
+								<ul class="nav nav-pills">
+									<li class="nav-item" th:each="i:${pages}"
+										th:class="${i==pageEnCours}?active:''"><a
+										th:href="@{/contrat/listeContrat(page=${i},mc=${mc})}" th:text="${i+1}"
+										class="nav-link"></a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+  </div>
+
+</body>
+</html>

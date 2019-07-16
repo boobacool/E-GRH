@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout/layout">
+
+<head>
+<link rel="stylesheet" type="text/css" media="all" href="../static/css/div.css" th:href="@{/css/div.css}" />
+
+<meta charset="utf-8"/>
+<title>Personnels</title>
+</head>
+
+<body>
+
+<div layout:fragment="content">
+
+<h1>BIENVENU SUR L'APPLICATION DE GRH</h1>
+
+<div class = "panel panel-default">
+   <div class = "panel-heading">
+      <h3 class = "panel-title">Statistique sur le Personnel</h3>
+   </div>
+   
+   <table class = "table table-hover">
+      <tr>
+         <td>Contrats actives</td>
+         <td th:text="${nbc}"> </td>
+      </tr>
+      
+      <tr>
+         <td>Nombre d'employés</td>
+         <td th:text="${nbp}"></td>
+      </tr>
+      
+      <tr>
+         <td>Nombre total de contrats</td>
+         <td th:text="${nbco}"></td>
+      </tr>
+      
+      <tr>
+         <td>Nombre total de congés</td>
+         <td th:text="${nbcong}"></td>
+      </tr>
+   </table>
+   
+</div>
+
+<div class = "panel panel-default">
+   <div class = "panel-heading">Statistique par année</div>
+   
+   <table class = "table table-hover">
+      <tr>
+         <td>Nombre de congés par personnel</td>
+         <td>
+         <form th:action="@{/nbcongep}" method="get">
+         <input type="text" id="annee" th:value="${annee}" name="annee" placeholder="rechercher par année" />
+					  <button type="submit" class="btn btn-primary btn-sm">Recherche</button>
+         </form>
+         </td>
+      </tr>
+      
+      <tr>
+         <td>Nombre de missions par personnel</td>
+         <td>
+         <form th:action="@{/nbmp}" method="get">
+         <input type="text" id="annee" th:value="${annee}" name="annee" placeholder="rechercher par année" />
+					  <button type="submit" class="btn btn-primary btn-sm">Recherche</button>
+         </form>
+         </td>
+      </tr>
+   </table>
+   
+</div>
+</div>
+</body>
+</html>

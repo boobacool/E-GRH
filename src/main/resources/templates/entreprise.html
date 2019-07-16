@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout/layout">
+
+<head>
+<meta charset="utf-8"/>
+<title>Entreprises</title>
+</head>
+
+<body>
+
+  <div layout:fragment="content">
+ <div class="row">
+			<h1 style="padding-left: 30px;">Entreprises</h1>
+			<div class="col-md-6" style="padding-left: 30px;">
+				<div class="panel panel-default">
+					<div class="panel-heading">Formulaire Entreprises</div>
+					<div class="panel-body">
+						<form class="form-group" action="#" th:object="${ent}"
+							th:action="@{/entreprise/saveent}" method="post">
+							<div class="row">
+								<div class="form-group col-md-3">
+									<input th:type="hidden" name="id" th:field="*{id}" />
+								</div>
+							</div>
+							<div class="row">
+								<div class="form-group col-md-12">
+									<input type="text" class="form-control" id="raisonsociale"
+										th:field="*{raisonsociale}" placeholder="Raison sociale" />
+								</div>
+							</div>
+							<div class="row">
+								<div class="form-group col-md-12">
+									<input type="text" class="form-control" id="adresse"
+										th:field="*{adresse}" placeholder="Adresse" />
+								</div>
+							</div>
+							
+							<div class="row">
+								<div class="form-group col-md-12">
+									<input type="text" class="form-control" id="datecreation"
+										th:field="*{datecreation}" placeholder="Date de création" />
+								</div>
+							</div>
+							<div class="row">
+								<div class="form-group col-md-12">
+									<input type="text" class="form-control" id="contact"
+										th:field="*{contact}" placeholder="Contact" />
+								</div>
+							</div>
+							<div class="row">
+								<div class="form-group col-md-12">
+									<input type="text" class="form-control" id="typestructure"
+										th:field="*{typestructure}" placeholder="Type Structure" />
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="form-group">
+									<div class="col-md-6">
+										<button type="submit" th:if="*{id} == 0"
+											class="btn btn-primary">Ajouter</button>
+										<button type="submit" th:if="*{id} > 0"
+											class="btn btn-primary">Modifier</button>
+										<a href="#" th:href="@{/entreprise/rajouterent}" class="btn btn-danger"
+											role="button">Annuler</a>
+									</div>
+
+								</div>
+							</div>
+						</form>
+
+
+
+					</div>
+				</div>
+			</div>
+
+			<div class="col-md-6">
+				<div class="panel panel-default">
+					<div class="panel-heading">La liste Entreprises</div>
+					<div class="panel-body">
+						<h1>Liste Entreprises</h1>
+						<div class="card">
+							<div class="card-block">
+								<table class="table table-hover">
+									<thead>
+										<tr>
+											<th>ID</th>
+											<th>Entreprises</th>
+											<th>Actions</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr th:each="c:${listent.content}">
+											<td th:text="${c.id}"></td>
+											<td th:text="${c.raisonsociale}"></td>
+											<td th:text="${#dates.format(c.datecreation, 'dd/MM/yyyy')}"></td>
+											<td th:text="${c.adresse}"></td>
+											<td th:text="${c.contact}"></td>
+											<td th:text="${c.typestructure}"></td>
+											<td><a th:href="@{/entreprise/modifierentR(id=${c.id})}" class="btn btn-primary btn-sm" ><span class="glyphicon glyphicon-edit"></span>Modifier</a>
+												<a onclick="return confirm('Etes vous sure ?')"
+												th:href="@{/entreprise/supprimerent(id=${c.id})}" class="btn btn-danger btn-sm" ><span class="glyphicon glyphicon-trash"></span>Supprimer</a></td>
+										</tr>
+									</tbody>
+
+								</table>
+								<hr />
+
+								<ul class="nav nav-pills">
+									<li class="nav-item" th:each="i:${pages}"
+										th:class="${i==pageEnCours}?active:''"><a
+										th:href="@{/entreprise/rajouterent(page=${i})}" th:text="${i+1}"
+										class="nav-link"></a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+  </div>
+
+</body>
+</html>

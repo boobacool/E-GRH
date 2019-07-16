@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout/layout">
+
+<head>
+<meta charset="utf-8"/>
+<title>Formations</title>
+</head>
+
+<body>
+
+<div layout:fragment="content">
+ <div class="row">
+	
+		<div class="row">
+			<h1 style="padding-left: 30px;">Formations</h1>
+			<div class="col-md-6" style="padding-left: 30px;">
+				<div class="panel panel-default">
+					<div class="panel-heading">Formulaire Formations</div>
+					<div class="panel-body">
+						<form class="form-group" action="#" th:object="${ftion}" th:action="@{/formation/saveftion}" method="post">
+							<div class="row">
+								<div class="form-group col-md-3">
+									<input th:type="hidden" name="id" th:field="*{id}" />
+								</div>
+							</div>
+							<div class="row">
+								<div class="form-group col-md-12">
+									<input type="text" class="form-control" id="theme" th:field="*{theme}" placeholder="Thème" />
+								</div>
+							</div>
+							<div class="row">
+								<div class="form-group col-md-12">
+									<input type="text" class="form-control" id="dateformation" th:field="*{dateformation}" placeholder="Date de Formation" />
+								</div>
+							</div>
+                           
+							<div class="row">
+                                <div class="form-group col-md-12">
+								<select  class="form-control" id="iden">
+								<option  th:value="0">====Entreprise====</option>
+                                <option th:each="c : ${listent}" th:value="${c.id}" th:text="${c.raisonsociale+' '+c.contact}"></option>
+                               </select>
+															
+								</div>
+							</div>
+							
+							<div class="row">
+                                <div class="form-group col-md-12">
+								<select th:field="*{formateur}" id="formateur" class="form-control">
+								<option  th:value="0">====Formateurs====</option>
+                                </select>
+															
+								</div>
+							</div>
+							
+                              
+								<div class="row">
+									<div class="form-group">
+										<div class="col-md-6">
+											<button type="submit" th:if="*{id} == 0" class="btn btn-primary">Ajouter</button>
+											<button type="submit" th:if="*{id} > 0" class="btn btn-primary">Modifier</button>
+											<a href="#" th:href="@{/formation/rajouterftion}" class="btn btn-danger" role="button">Annuler</a>
+										</div>
+
+									</div>
+								</div>
+						</form>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-md-6">
+				<div class="panel panel-default">
+					<div class="panel-heading">La liste de Formations</div>
+					<div class="panel-body">
+						<h1>Liste Formations</h1>
+						<div class="card">
+							<div class="card-block">
+								<table class="table table-hover">
+									<thead>
+										<tr>
+											<th>ID</th>
+											<th>Thèmes</th>
+											<th>Dates formations</th>
+											<th>Formateurs</th>
+											<th>Actions</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr th:each="p:${listeftions.content}">
+											<td th:text="${p.id}"></td>
+											<td th:text="${p.theme}"></td>
+											<td th:text="${#dates.format(p.dateformation, 'dd/MM/yyyy')}"></td>
+											<td th:text="${p.formateur.nom+' '+p.formateur.prenom+' '+p.formateur.contact}"></td>
+											<td><a th:href="@{/formation/modifierftionR(id=${p.id})}" class="btn btn-primary btn-sm" ><span class="glyphicon glyphicon-edit"></span>Modifier</a>
+												<a onclick="return confirm('Etes vous sure ?')"
+												th:href="@{/formateur/supprimerftion(id=${p.id})}" class="btn btn-danger btn-sm" ><span class="glyphicon glyphicon-trash"></span>Supprimer</a></td>
+										</tr>
+									</tbody>
+
+								</table>
+								<hr />
+
+								<ul class="nav nav-pills">
+									<li class="nav-item" th:each="i:${pages}"
+										th:class="${i==pageEnCours}?active:''"><a
+										th:href="@{/formation/rajouterftion(page=${i})}" th:text="${i+1}"
+										class="nav-link"></a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+  </div>
+  <script type="text/javascript" th:src="@{/js/posScript.js}" src="../static/js/posScript.js"></script>
+		
+</div>
+</body>
+</html>

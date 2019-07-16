@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout/layout">
+
+<head>
+<meta charset="utf-8"/>
+<title>Personnels</title>
+</head>
+
+<body>
+
+<div layout:fragment="content">
+ <div class="row">
+	
+		<div class="row">
+			<h1 style="padding-left: 30px;">Personnels</h1>
+			<div class="col-md-6" style="padding-left: 30px;">
+			<span class="text-danger" th:if="${m!=null}" th:text="${m}"></span>
+				<div class="panel panel-default">
+				       							
+					<div class="panel-heading">Formulaire Personnels</div>
+					<div class="panel-body">
+						<form class="form-group" action="#" th:object="${pers}" th:action="@{/personnel/savepers}" method="post">
+							<div class="row">
+								<div class="form-group col-md-3">
+									<input th:type="hidden" name="id" th:field="*{id}" />
+								</div>
+							</div>
+							<div class="row">
+								<div class="form-group col-md-12">
+									<input type="text" class="form-control" id="matricule" th:field="*{matricule}" placeholder="Matricule" />
+								    
+								</div>
+								
+							</div>
+							<p th:if="${#fields.hasErrors('matricule')}" th:errors="*{matricule}" th:class="'error'">something</p>
+                        
+							<div class="row">
+								<div class="form-group col-md-12">
+									<input type="text" class="form-control" id="nom" th:field="*{nom}" placeholder="Nom" />
+									</div>
+							</div>
+							<div class="row">
+								<div class="form-group col-md-12">
+									<input type="text" class="form-control" id="prenom" th:field="*{prenom}" placeholder="Prénoms" />
+									<span class="text-danger" th:if="${#fields.hasErrors('prenom')}" th:errors="*{prenom}"></span>
+								</div>
+							</div>
+							<div class="row">
+								<div class="form-group col-md-12">
+									<input type="text" class="form-control" id="datenaissp" th:field="*{datenaiss}" placeholder="Date de naissance" />
+									<span class="text-danger" th:if="${#fields.hasErrors('datenaiss')}" th:errors="*{datenaiss}"></span>
+								</div>
+							</div>
+							<div class="row">
+								<div class="form-group col-md-12">
+									<input type="text" class="form-control" id="lieunaiss" th:field="*{lieunaiss}" placeholder="Lieu de naissance" />
+									<span class="text-danger" th:if="${#fields.hasErrors('lieunaiss')}" th:errors="*{lieunaiss}"></span>
+								</div>
+							</div>
+							<div class="row">
+								<div class="form-group col-md-12">
+									<input type="text" class="form-control" id="contact" th:field="*{contact}" placeholder="Contact" />
+									<span class="text-danger" th:if="${#fields.hasErrors('contact')}" th:errors="*{contact}"></span>
+								</div>
+							</div>
+							
+							<div class="row">
+								<div class="form-group col-md-12">
+									<input type="text" class="form-control" id="nbreannee" th:field="*{nbreannee}" placeholder="Nombre d'Années" />
+									<span class="text-danger" th:if="${#fields.hasErrors('nbreannee')}" th:errors="*{nbreannee}"></span>
+								</div>
+							</div>
+							
+							<div class="row">
+								<div class="form-group col-md-12">
+									<input type="text" class="form-control" id="dateentree" th:field="*{dateentree}" placeholder="Date d'entrée" />
+									<span class="text-danger" th:if="${#fields.hasErrors('dateentree')}" th:errors="*{dateentree}"></span>
+								</div>
+							</div>
+                           
+							<div class="row">
+                                <div class="form-group col-md-12">
+								<select th:field="*{antenne}" class="form-control">
+								<option  th:value="0">====Antennes====</option>
+                                <option th:each="c : ${listeant}" th:value="${c.id}" th:text="${c.lib}"></option>
+                               </select>
+								<span class="text-danger" th:if="${#fields.hasErrors('antenne')}" th:errors="*{antenne}"></span>							
+								</div>
+							</div>
+							
+							<div class="row">
+                                <div class="form-group col-md-12">
+								<select th:field="*{specialite}" class="form-control">
+								<option  th:value="0">====Spécialités====</option>
+                                <option th:each="c : ${listesp}" th:value="${c.id}" th:text="${c.lib}"></option>
+                               </select>
+                               <span class="text-danger" th:if="${#fields.hasErrors('specialite')}" th:errors="*{specialite}"></span>
+															
+								</div>
+							</div>
+							
+							<div class="row">
+                                <div class="form-group col-md-12">
+								<select th:field="*{service}" class="form-control">
+								<option  th:value="0">====Services====</option>
+                                <option th:each="c : ${listeSrc}" th:value="${c.id}" th:text="${c.lib}"></option>
+                               </select>
+                               	<span class="text-danger" th:if="${#fields.hasErrors('service')}" th:errors="*{service}"></span>								
+								</div>
+							</div>
+							
+							<div class="row">
+                                <div class="form-group col-md-12">
+								<select th:field="*{typePersonnel}" class="form-control">
+								<option  th:value="0">====Types Personnels====</option>
+                                <option th:each="c : ${listetp}" th:value="${c.id}" th:text="${c.lib}"></option>
+                               </select>
+                               <span class="text-danger" th:if="${#fields.hasErrors('typePersonnel')}" th:errors="*{typePersonnel}"></span>											
+								</div>
+							</div>
+							
+                              
+								<div class="row">
+									<div class="form-group">
+										<div class="col-md-6">
+											<button type="submit" th:if="*{id} == 0" class="btn btn-primary">Ajouter</button>
+											<button type="submit" th:if="*{id} > 0" class="btn btn-primary">Modifier</button>
+											<a href="#" th:href="@{/personnel/rajouterpers}" class="btn btn-danger" role="button">Annuler</a>
+										</div>
+
+									</div>
+								</div>
+						</form>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-md-6">
+				<div class="panel panel-default">
+					<div class="panel-heading">La liste de Personnels</div>
+					<div class="panel-body">
+						<h1>Liste Personnels</h1>
+						<div class="card">
+							<div class="card-block">
+								<table class="table table-hover">
+									<thead>
+										<tr>
+											<th>Matricule</th>
+											<th>Nom</th>
+											<th>Prénoms</th>
+											<th>Contact</th>
+											<th>spécialité</th>
+											<th>Actions</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr th:each="p:${listepers.content}">
+											<td th:text="${p.matricule}"></td>
+											<td th:text="${p.nom}"></td>
+											<td th:text="${p.prenom}"></td>
+											<td th:text="${p.contact}"></td>
+											<td th:text="${p.specialite.lib}"></td>
+											<td><a th:href="@{/personnel/modifierpersR(id=${p.id})}" class="btn btn-primary btn-sm" ><span class="glyphicon glyphicon-edit"></span>Modifier</a>
+												<a onclick="return confirm('Etes vous sure ?')"
+												th:href="@{/personnel/supprimerpers(id=${p.id})}" class="btn btn-danger btn-sm" ><span class="glyphicon glyphicon-trash"></span>Supprimer</a></td>
+										</tr>
+									</tbody>
+
+								</table>
+								<hr />
+
+								<ul class="nav nav-pills">
+									<li class="nav-item" th:each="i:${pages}"
+										th:class="${i==pageEnCours}?active:''"><a
+										th:href="@{/personnel/rajouterpers(page=${i})}" th:text="${i+1}"
+										class="nav-link"></a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+  </div>
+</div>
+</body>
+</html>
